@@ -11,7 +11,8 @@ int main()
 	int total;
 	SC("%d",&total);
 	char* str=(char*)malloc(total*sizeof(char)*10000);
-	int* ans=(char*)malloc(total*sizeof(int)*2);
+	int* ans=(int*)malloc(total*sizeof(int)*4);
+	int anslist[500][2];
 	for(int i=0;i<total;i++)
 	{
 		scanf("%s",&str[i]);
@@ -38,24 +39,46 @@ int main()
 			number[k]=*(&str[i]+j);
 			k++;	
 		}
-		/*for(int x=0;x<symnum;x++)
-		{
-			printf("%d\n",numlist[x]);
-			printf("%c\n",symble[x]);
-		}
-		printf("====================\n");*/
-		*(&ans[i])=numlist[0];
-		*(&ans[i]+1)=1;
+		*(&ans[i]+1)=numlist[0];
+		*(&ans[i]+2)=1;
 		for(int y=0;y<symnum-1;y++)
 		{
-			switch(symble[symnum])
+			switch(symble[y])
+			{
 				case '+':
-					*(&ans[i])+=(*(&ans[i]+1))*symble[symnum+1];
+					*(&ans[i]+1)+=(*(&ans[i]+2))*numlist[y+1];
+					break;
 				case '-':
-					*(&ans[i])-=(*(&ans[i]+1))*symble[symnum+1];
+					*(&ans[i]+1)-=(*(&ans[i]+2))*numlist[y+1];
+					break;
 				case '*':
-					*(&ans[i])=(*(&ans[i]))*symble[symnum+1];
+					*(&ans[i]+1)=(*(&ans[i]+1))*numlist[y+1];
+					break;
+				case '/':
+					*(&ans[i]+2)=(*(&ans[i]+2))*numlist[y+1];
+					break;
+			}
 		}
+		anslist[i][0]=*(&ans[i]+1);
+		anslist[i][1]=*(&ans[i]+2);
+	}
+	for(int b=0;b<total;b++)
+	{
+		for(int a=2;a<=anslist[b][1];a++)
+		{
+			if((anslist[b][0]%a)==0&&(anslist[b][1]%a)==0)
+			{
+				anslist[b][0]=anslist[b][0]/a;
+				anslist[b][1]=anslist[b][1]/a;
+				a--;
+			}
+		}
+		if(anslist[b][0]==0)
+		{
+			printf("0");
+			break;
+		}
+		printf("%d/%d\n",anslist[b][0],anslist[b][1]);
 	}
 	return 0;
 }

@@ -5,4 +5,6 @@ NOIP items
 
 (c):correct edition
 
-(m)；my edition
+(m):my edition
+
+(ne):new edition

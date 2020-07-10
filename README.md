@@ -1,10 +1,12 @@
 # NOIP
-NOIP items
-# Notice
-(s):submition edition
+NOIP items on NOI OJ and Luogu OJ
 
-(c):correct edition
+## Notic
 
-(m):my edition
+(s): Submition Edition
 
-(ne):new edition
+(c): Correct Edition
+
+(m): My Edition
+
+(ne): New Edition
